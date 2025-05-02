@@ -3,36 +3,50 @@ export const configPage = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Document to PDF Service</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+    
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       line-height: 1.6;
       color: #333;
       max-width: 800px;
+      width: 100%;
       margin: 0 auto;
-      padding: 20px;
+      padding: 15px;
+      font-size: 16px;
     }
+    
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       color: #2c3e50;
+      font-size: 1.8rem;
     }
+    
     .tabs {
       display: flex;
+      flex-wrap: wrap;
       margin-bottom: 20px;
       border-bottom: 1px solid #ddd;
     }
+    
     .tab {
-      padding: 10px 20px;
+      padding: 8px 15px;
       cursor: pointer;
       margin-right: 5px;
+      margin-bottom: 5px;
       border: 1px solid #ddd;
       border-bottom: none;
       border-radius: 5px 5px 0 0;
       background-color: #f8f9fa;
+      font-size: 0.9rem;
     }
+    
     .tab.active {
       background-color: #fff;
       border-bottom: 1px solid #fff;
@@ -40,68 +54,117 @@ export const configPage = `<!DOCTYPE html>
       font-weight: bold;
       color: #3498db;
     }
+    
     .tab-content {
       display: none;
     }
+    
     .tab-content.active {
       display: block;
     }
+    
     .form-group {
       margin-bottom: 15px;
     }
+    
     label {
       display: block;
       margin-bottom: 5px;
       font-weight: bold;
     }
+    
     input[type="text"], textarea, select {
       width: 100%;
       padding: 8px;
       border: 1px solid #ddd;
       border-radius: 4px;
       box-sizing: border-box;
+      font-size: 16px; /* Prevent zoom on focus in iOS */
     }
+    
     textarea {
       min-height: 150px;
       font-family: monospace;
     }
+    
     .options {
       background-color: #f8f9fa;
       padding: 15px;
       border-radius: 5px;
       margin-top: 20px;
     }
+    
     .options h3 {
       margin-top: 0;
       margin-bottom: 15px;
+      font-size: 1.2rem;
     }
+    
     button {
       background-color: #3498db;
       color: white;
       border: none;
-      padding: 10px 20px;
+      padding: 12px 20px;
       border-radius: 4px;
       cursor: pointer;
       font-size: 16px;
+      width: 100%;
+      max-width: 300px;
+      touch-action: manipulation; /* Improves touch responsiveness */
     }
+    
     button:hover {
       background-color: #2980b9;
     }
+    
     .result {
       margin-top: 20px;
     }
+    
     .result pre {
       background-color: #f8f9fa;
       padding: 10px;
       border-radius: 4px;
       overflow-x: auto;
+      font-size: 0.9rem;
+      word-break: break-all;
+      white-space: pre-wrap;
     }
+    
     .input-row {
       display: flex;
+      flex-wrap: wrap;
       gap: 10px;
     }
+    
     .input-row .form-group {
-      flex: 1;
+      flex: 1 0 calc(50% - 10px);
+      min-width: 120px;
+    }
+    
+    /* Mobile-specific styles */
+    @media (max-width: 600px) {
+      .tabs {
+        justify-content: center;
+      }
+      
+      .tab {
+        flex: 1 0 calc(50% - 10px);
+        text-align: center;
+        margin-right: 5px;
+      }
+      
+      .input-row .form-group {
+        flex: 1 0 100%;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      button {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -216,6 +279,13 @@ This is a sample Markdown document.
   </div>
 
   <script>
+    // Prevent double-tap zoom on iOS
+    document.addEventListener('touchend', function(event) {
+      if (event.target.tagName === 'BUTTON' || event.target.tagName === 'SELECT') {
+        event.preventDefault();
+      }
+    }, false);
+    
     // Switch tabs
     document.querySelectorAll('.tab').forEach(tab => {
       tab.addEventListener('click', () => {
