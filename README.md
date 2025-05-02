@@ -2,6 +2,10 @@
 
 A Cloudflare Worker service that converts HTML and Markdown documents to PDF files. This service provides a simple web interface and API endpoints for converting various document formats to PDF.
 
+[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/doctoroyy/document-to-pdf-service)
+
+> **Note:** Replace `doctoroyy` in the deploy URL with your actual GitHub username after forking this repository.
+
 ## Features
 
 - Convert HTML documents to PDF
